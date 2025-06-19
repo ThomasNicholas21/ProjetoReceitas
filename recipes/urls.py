@@ -1,10 +1,10 @@
 from django.urls import path
-from .views import test_view
+from .views import home
 
 
 app_name = 'recipe'
 
 
 urlpatterns = [
-    path('test/', test_view())
+    path('', home)
 ]
