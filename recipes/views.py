@@ -1,9 +1,8 @@
-from django.shortcuts import HttpResponse
+from django.shortcuts import render
 
 
-def test_view(request):
-    return HttpResponse(
-        {
-            'test': 'testando teste do teste'
-        }
-        )
+def home(request):
+    return render(
+        request=request,
+        template_name='pages/home.html',
+    )
