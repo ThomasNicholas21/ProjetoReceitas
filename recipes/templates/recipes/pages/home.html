@@ -1,9 +1,17 @@
 {% include "recipes/partials/_head.html" %}
 
 <body>
+  <div class="page-wrapper">
     {% include "recipes/partials/_header.html" %}
     {% include "recipes/partials/_search.html" %}
-    {% include "recipes/partials/_main.html" %}
+    <main class="main-content-container">
+      <div class="main-content main-content-list container">
+        {% include "recipes/partials/_recipe.html" %}
+        {% include "recipes/partials/_recipe.html" %}
+        {% include "recipes/partials/_recipe.html" %}
+      </div>
+    </main>
+    {% include "recipes/partials/_footer.html" %}
+  </div>
 </body>
-
 </html>
