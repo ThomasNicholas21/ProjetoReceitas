@@ -190,7 +190,7 @@ body {
 .main-content-list {
     display: grid;
     height: 100%;
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
     gap: var(--spacing-gutter-large);
     width: 100%;
 }
@@ -278,6 +278,17 @@ body {
 
 .recipe-footer a:hover {
     filter: brightness(1.2);
+}
+
+/* recipe style */
+
+.main-content-detail .recipe-list-item {
+    max-width: 64rem;
+}
+
+.main-content-detail .recipe-list-item:hover {
+    transform: scale(1);
+    box-shadow: -5px 5px 15px rgba(0, 0, 0, 0.2);
 }
 
 /* footer style */
