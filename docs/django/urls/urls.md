@@ -25,10 +25,31 @@ urlpatterns = [
 - `Name`: Um nome identificador para essa rota. Útil para usar em templates ({% url 'produto_detail' id=1 %}) e para reverse `URL` resolution.
 - `Kwargs`: (Opcional) Um dicionário de argumentos adicionais que são passados para a view em tempo de definição, não pela `URL`. No exemplo acima, a view produto_detail receberia também foo="bar" como argumento.
 
+Quando a url é dinâmica, ou seja, recebe um valor como no exemplo acima, é importante saber que ela, por padrão, recebe somente os seguintes valores:
+- `str`: ceita qualquer string sem barra `(/)`
+    ```python
+    path('produtos/<str:id>/', views.produto_detail, name='produto_detail'),
+    ````
+- `int`: Aceita apenas números inteiros
+    ```python
+    path('produtos/<int:id>/', views.produto_detail, name='produto_detail'),
+    ````
+- `slug`: Aceita letras, números, hífens e underlines `([a-zA-Z0-9_-]+)` no padrão ASCII
+    ```python
+    path('produtos/<slug:id>/', views.produto_detail, name='produto_detail'),
+    ````
+- `uuid`: Aceita apenas valores no formato `UUID: 8-4-4-4-12`
+    ```python
+    path('produtos/<uuid:id>/', views.produto_detail, name='produto_detail'),
+    ````
+- `path`: Aceita strings com `(/)` como `/produtos/roupas/camisa/verde/`
+    ```python
+    path('produtos/<path:id>/', views.produto_detail, name='produto_detail'),
+    ````
 
 ## Projeto
 - Aqui é possível visualizar como o `urls.py` desse projeto: [👉 clique aqui](https://github.com/ThomasNicholas21/ProjetoReceitas/blob/main/project/urls.py)
 
 ## Obs
 Esse projeto está sendo feito para praticar habilidades técnicas e para aprimorar a resolução de problemas. A documentação utilizada para esse estudo foi:
-- [Django Documentation 📚](https://docs.djangoproject.com/en/5.2/)
+- [Django Documentation 📚](https://docs.djangoproject.com/en/5.2/topics/http/urls/)
