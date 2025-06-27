@@ -15,15 +15,21 @@ Em resumo, as `URLs` são pontes entre o cliente e o servidor. Funcionando da se
 from django.urls import path
 from . import views
 
+app_name='ecommerce'
+
 urlpatterns = [
     path('produtos/<int:id>/', views.produto_detail, name='produto_detail', kwargs={'foo': 'bar'}),
 ]
 
 ```
-- `URL`: Padrão de URL a ser casado. Pode incluir parâmetros dinâmicos, como <int:id>, que será passado como argumento para a view.
-- `View`: A função (ou classe baseada em view) que será executada se o padrão da `URL` for encontrado. Essa função recebe um objeto request e os parâmetros definidos na `URL`.
-- `Name`: Um nome identificador para essa rota. Útil para usar em templates ({% url 'produto_detail' id=1 %}) e para reverse `URL` resolution.
-- `Kwargs`: (Opcional) Um dicionário de argumentos adicionais que são passados para a view em tempo de definição, não pela `URL`. No exemplo acima, a view produto_detail receberia também foo="bar" como argumento.
+- `url`: Padrão de URL a ser casado. Pode incluir parâmetros dinâmicos, como <int:id>, que será passado como argumento para a view.
+- `view`: A função (ou classe baseada em view) que será executada se o padrão da `URL` for encontrado. Essa função recebe um objeto request e os parâmetros definidos na `URL`.
+- `name`: Um nome identificador para essa rota. Útil para usar em templates ({% url 'produto_detail' id=1 %}) e para reverse `URL` resolution.
+- `kwargs`: (Opcional) Um dicionário de argumentos adicionais que são passados para a view em tempo de definição, não pela `URL`. No exemplo acima, a view produto_detail receberia também foo="bar" como argumento.
+- `app_name`: Essa variável é o identificador da URL do aplicativo. Ao utilizar `include` é possível nomear o aplicativo através do parâmetro `namespace`, que haje como um apelido. Ambos vão funcionar, e esses identificadores servem por exemplo, para fornecer o caminho absoluto daquela URL, onde diversas funções utilizam, como:
+    - `django.urls.resolvers.URLResolver`: manipula a árvore de URLs.
+    - `django.urls.reverse()`: manipula resolução por namespace.
+    - `django.urls.include()`: manipula a reversão de URLs com base nos nomes definidos nos apps.
 
 Quando a url é dinâmica, ou seja, recebe um valor como no exemplo acima, é importante saber que ela, por padrão, recebe somente os seguintes valores:
 - `str`: ceita qualquer string sem barra `(/)`
