@@ -124,7 +124,7 @@ As tags `if`, `elif`, `else` permitem que você execute blocos de código condic
 
 ## Obs
 Esse projeto está sendo feito para praticar habilidades técnicas e para aprimorar a resolução de problemas. A documentação utilizada para esse estudo foi:
-- [Django Documentation 📚](https://docs.djangoproject.com/pt-br/3.2/topics/templates/)
-- [Django Documentation 📚](https://docs.djangoproject.com/pt-br/3.2/ref/templates/language/)
-- [Django Documentation 📚](https://docs.djangoproject.com/pt-br/3.2/ref/templates/builtins/#ref-templates-builtins-tags)
+- [Django Documentation Templates📚](https://docs.djangoproject.com/pt-br/3.2/topics/templates/)
+- [Django Documentation Templates Language📚](https://docs.djangoproject.com/pt-br/3.2/ref/templates/language/)
+- [Django Documentation Templates Tags📚](https://docs.djangoproject.com/pt-br/3.2/ref/templates/builtins/#ref-templates-builtins-tags)
 

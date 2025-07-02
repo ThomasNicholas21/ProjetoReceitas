@@ -1,4 +1,4 @@
-# Arquivos Staticos Django
+# Arquivos Estáticos Django
 Para aplicações web, arquivos estáticos são recursos que não mudam ou raramente mudam, servidos diretamente para o navegador do usuário. Arquivos estáticos englobam:
     - HTML
     - CSS
