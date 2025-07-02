@@ -23,8 +23,8 @@ class Recipe(models.Model):
         max_length=168
     )
     slug = models.SlugField()
-    prepartion_time = models.IntegerField()
-    prepartion_time_unit = models.CharField(
+    preparation_time = models.IntegerField()
+    preparation_time_unit = models.CharField(
         max_length=64,
         choices=(
             ('minutos', 'Minutos'),
