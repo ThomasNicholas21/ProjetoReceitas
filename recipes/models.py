@@ -18,15 +18,20 @@ class Category(models.Model):
 class Recipe(models.Model):
     title = models.CharField(
         max_length=64
-        )
+    )
     description = models.CharField(
         max_length=168
-        )
+    )
     slug = models.SlugField()
     prepartion_time = models.IntegerField()
     prepartion_time_unit = models.CharField(
-        max_length=64
-        )
+        max_length=64,
+        choices=(
+            ('minutos', 'Minutos'),
+            ('horas', 'Horas'),
+        ),
+        default='minutos'
+    )
     servings = models.IntegerField()
     servings_unit = models.CharField(
         max_length=64
@@ -37,6 +42,12 @@ class Recipe(models.Model):
     )
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+    is_published = models.BooleanField(
+        default=False
+    )
+    cover = models.ImageField(
+        upload_to='recipes/cover/%Y/%m/%d/'
+    )
     author = models.ForeignKey(
         User,
         on_delete=models.SET_NULL,
