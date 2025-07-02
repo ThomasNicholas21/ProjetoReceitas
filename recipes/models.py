@@ -46,7 +46,9 @@ class Recipe(models.Model):
         default=False
     )
     cover = models.ImageField(
-        upload_to='recipes/cover/%Y/%m/%d/'
+        upload_to='recipes/cover/%Y/%m/%d/',
+        default='default/hamburguer.png',
+        blank=True
     )
     author = models.ForeignKey(
         User,
