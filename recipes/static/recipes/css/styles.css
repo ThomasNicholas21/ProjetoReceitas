@@ -388,6 +388,15 @@ body {
   font-size: 1.2rem;
 }
 
+/* no content style */
+
+.no-content {
+    justify-self: center;
+    display: flex;
+    align-items: center;
+    color: var(--color-black);
+}
+
 /* footer style */
 .main-footer {
     display: flex;
