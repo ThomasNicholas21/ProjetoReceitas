@@ -54,12 +54,16 @@ class Recipe(models.Model):
         User,
         on_delete=models.SET_NULL,
         null=True,
+        blank=True,
+        default=None,
         related_name='author_recipe'
     )
     category = models.ForeignKey(
         Category,
         on_delete=models.SET_NULL,
         null=True,
+        blank=True,
+        default=None,
         related_name='category_recipe'
     )
 
