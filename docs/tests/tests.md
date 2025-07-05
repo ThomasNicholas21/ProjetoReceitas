@@ -20,25 +20,48 @@ Casos de erro devem ser analisados dentro do contexto da aplicação, levando em
 Devem ser analisadas todos os casos, tanto o de sucesso quanto o de falha. Normalmente é utilizado ferramentas como excel, notion, clickup, jira e entre outros.
 
 ## Assertions
-`Assertions` ou asserções, é um modo de 'afirmar' um retorno que irá ocorrer, tendo a palavra reserva `assert`
+**Assertions** ou **asserções** são uma forma de *afirmar* que determinada condição é verdadeira em tempo de execução. No Python, isso pode ser feito com a palavra-chave `assert`, que verifica se a condição fornecida é verdadeira. Caso não seja, uma exceção do tipo `AssertionError` é levantada.
 
-| Método                          | Avalia se                   | Novo em |
-|--------------------------------|-----------------------------|---------|
-| `assertEqual(a, b)`            | `a == b`                    |         |
-| `assertNotEqual(a, b)`         | `a != b`                    |         |
-| `assertTrue(x)`                | `bool(x) is True`           |         |
-| `assertFalse(x)`               | `bool(x) is False`          |         |
-| `assertIs(a, b)`               | `a is b`                    | 3.1     |
-| `assertIsNot(a, b)`            | `a is not b`                | 3.1     |
-| `assertIsNone(x)`              | `x is None`                 | 3.1     |
-| `assertIsNotNone(x)`           | `x is not None`             | 3.1     |
-| `assertIn(a, b)`               | `a in b`                    | 3.1     |
-| `assertNotIn(a, b)`            | `a not in b`                | 3.1     |
-| `assertIsInstance(a, b)`       | `isinstance(a, b)`          | 3.2     |
-| `assertNotIsInstance(a, b)`    | `not isinstance(a, b)`      | 3.2     |
+Isso permite aplicar a chamada **programação defensiva**, ajudando a tornar o código mais confiável e fácil de manter. Exemplo com `assert`:
+
+```python
+def soma():
+    assert 2 + 2 == 3, 'Cálculo errado'
+```
+
+Por baixo dos panos, isso equivale a:
+
+```python
+if not 2 + 2 == 3:
+    raise AssertionError('Cálculo errado')
+```
+
+---
+
+`unittest` e asserções
+
+Ao utilizar o módulo `unittest`, temos uma série de métodos de asserção disponíveis através da classe base `TestCase`. Esses métodos são preferíveis ao uso direto do `assert`, pois fornecem mensagens de erro mais descritivas e se integram melhor com ferramentas de testes.
+
+Abaixo estão os principais métodos de asserção fornecidos por `unittest`:
+
+| Método                      | Avalia se              | Novo em |
+| --------------------------- | ---------------------- | ------- |
+| `assertEqual(a, b)`         | `a == b`               |         |
+| `assertNotEqual(a, b)`      | `a != b`               |         |
+| `assertTrue(x)`             | `bool(x) is True`      |         |
+| `assertFalse(x)`            | `bool(x) is False`     |         |
+| `assertIs(a, b)`            | `a is b`               | 3.1     |
+| `assertIsNot(a, b)`         | `a is not b`           | 3.1     |
+| `assertIsNone(x)`           | `x is None`            | 3.1     |
+| `assertIsNotNone(x)`        | `x is not None`        | 3.1     |
+| `assertIn(a, b)`            | `a in b`               | 3.1     |
+| `assertNotIn(a, b)`         | `a not in b`           | 3.1     |
+| `assertIsInstance(a, b)`    | `isinstance(a, b)`     | 3.2     |
+| `assertNotIsInstance(a, b)` | `not isinstance(a, b)` | 3.2     |
 
 
 ## Mocks
+Mock é utilizado para simular em um cenário de teste objetos reais da aplicação. Nas linguagens de programação, normalmente se utiliza frameworks para isso, no caso do Python isso não é diferente, se utiliza `unittest` em diversos cenários.
 
 ## Fixtures
 
