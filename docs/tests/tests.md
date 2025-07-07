@@ -175,13 +175,8 @@ O `unittest` é considerado tanto um módulo quanto um framework de testes que j
 - `test runner`
     - Um test runner é um componente que orquestra a execução de testes e fornece o resultado para o usuário. O runner pode usar uma interface gráfica, uma interface textual ou retornar um valor especial para indicar os resultados da execução dos testes.
 
-
-
-#TODO: assertions
-#TODO: pytest
-#TODO: pytest.methods
-#TODO: fixtures
-#TODO: fixtures teardown
-#TODO: pytest - testes parametrizados
-#TODO: Mocks
+# Projeto
+Esse projeto será utilizado `unittest` e `pytest`, será utilizado como uma forma de aprender e aprofundar mais no ambiente de teste. Foi utilizado as seguintes referências:
+- [Unittest Documentation 📚](https://docs.python.org/pt-br/3.13/library/unittest.html#assert-methods)
+- [Pytest Documentation 📚](https://docs.pytest.org/en/stable/index.html)
 
