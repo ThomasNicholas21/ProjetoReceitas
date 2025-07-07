@@ -5,8 +5,27 @@ from recipes import views
 
 class RecipeViewsTest(TestCase):
     def test_recipes_home_view_function_is_correct(self):
+        """Test if home view is correct"""
         home_view = resolve(reverse('recipes:home'))
         self.assertIs(home_view.func, views.home)
+
+    def test_recipes_home_view_status_code_200(self):
+        """Test if home view status code is correct"""
+        response = self.client.get(reverse('recipes:home'))
+        self.assertEqual(response.status_code, 200)
+
+    def test_recipes_home_view_loads_correct_template(self):
+        """Test if home view status code is correct"""
+        response = self.client.get(reverse('recipes:home'))
+        self.assertTemplateUsed(response, 'recipes/pages/home.html')
+
+    def test_recipe_home_template_shows_no_recipes_found_if_no_recipes(self):
+        """Test if home view template that doens`t have recipes is correct"""
+        response = self.client.get(reverse('recipes:home'))
+        self.assertIn(
+            'Nenhuma receita entrada no momento 😔',
+            response.content.decode('utf-8'),
+            )
 
     def test_recipes_detail_view_function_is_correct(self):
         recipe_view = resolve(
