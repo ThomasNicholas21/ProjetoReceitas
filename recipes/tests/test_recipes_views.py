@@ -28,6 +28,7 @@ class RecipeViewsTest(TestCase):
             )
 
     def test_recipes_detail_view_function_is_correct(self):
+        """Test if detail view is correct"""
         recipe_view = resolve(
             reverse(
                 'recipes:recipe',
@@ -39,6 +40,7 @@ class RecipeViewsTest(TestCase):
         self.assertIs(recipe_view.func, views.recipe)
 
     def test_recipes_category_view_function_is_correct(self):
+        """Test if category view is correct"""
         category_view = resolve(
             reverse(
                 'recipes:category',
