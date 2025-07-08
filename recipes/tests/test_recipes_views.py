@@ -3,7 +3,7 @@ from django.urls import reverse, resolve
 from recipes import views
 
 
-class RecipeViewsTest(TestCase):
+class RecipeHomeViewTest(TestCase):
     def test_recipes_home_view_function_is_correct(self):
         """Test if home view is correct"""
         home_view = resolve(reverse('recipes:home'))
@@ -27,6 +27,8 @@ class RecipeViewsTest(TestCase):
             response.content.decode('utf-8'),
             )
 
+
+class RecipeDetailViewTest(TestCase):
     def test_recipes_detail_view_function_is_correct(self):
         """Test if detail view is correct"""
         recipe_view = resolve(
@@ -39,6 +41,20 @@ class RecipeViewsTest(TestCase):
             )
         self.assertIs(recipe_view.func, views.recipe)
 
+    def test_recipes_detail_view_status_code_404_if_no_recipes(self):
+        """Test if detail view status code is correct"""
+        response = self.client.get(
+            reverse(
+                'recipes:recipe',
+                kwargs={
+                    'id_recipe': 1000
+                    }
+                )
+            )
+        self.assertEqual(response.status_code, 404)
+
+
+class RecipeCategoryViewTest(TestCase):
     def test_recipes_category_view_function_is_correct(self):
         """Test if category view is correct"""
         category_view = resolve(
@@ -50,3 +66,15 @@ class RecipeViewsTest(TestCase):
                 )
             )
         self.assertIs(category_view.func, views.category)
+
+    def test_recipes_category_view_status_code_404_if_no_recipes(self):
+        """Test if category view status code is correct"""
+        response = self.client.get(
+            reverse(
+                'recipes:category',
+                kwargs={
+                    'id_category': 122121
+                    }
+                )
+            )
+        self.assertEqual(response.status_code, 404)
