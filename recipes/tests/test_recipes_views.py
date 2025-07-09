@@ -113,7 +113,7 @@ class RecipeDetailViewTest(RecipeFixture):
             reverse(
                 'recipes:recipe',
                 kwargs={
-                    'id_recipe': recipe.category.pk
+                    'id_recipe': recipe.pk
                 }
                 )
             )
