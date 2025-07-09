@@ -43,6 +43,20 @@ class RecipeHomeViewTest(RecipeFixture):
         self.assertIn('serving test unit', content)
         self.assertEqual(len(response_context_recipes), 1)
 
+    def test_recipe_home_template_dont_load_recipes_not_published(self):
+        """Test if recipe is_published is False and doesn't loads the recipe"""
+        self.make_recipe(is_published=False)
+
+        response = self.client.get(reverse('recipes:home'))
+        content = response.content.decode('utf-8')
+        response_context_recipes = response.context['recipes']
+
+        self.assertEqual(len(response_context_recipes), 0)
+        self.assertIn(
+            'Nenhuma receita entrada no momento 😔',
+            content,
+        )
+
 
 class RecipeDetailViewTest(RecipeFixture):
     def test_recipes_detail_view_function_is_correct(self):
@@ -70,12 +84,12 @@ class RecipeDetailViewTest(RecipeFixture):
         self.assertEqual(response.status_code, 404)
 
     def test_recipe_detail_template_loads_one_recipe(self):
-        """Test if recipe loads in category page"""
+        """Test if recipe loads in detail page"""
         needed_title = 'Detail Test'
-        needed_step = 'Step Description Test'
+        needed_preparation_steps = 'Step Description Test'
         self.make_recipe(
             title=needed_title,
-            preparation_steps=needed_step
+            preparation_steps=needed_preparation_steps
             )
 
         response = self.client.get(
@@ -89,7 +103,7 @@ class RecipeDetailViewTest(RecipeFixture):
         content = response.content.decode('utf-8')
 
         self.assertIn(needed_title, content)
-        self.assertIn(needed_step, content)
+        self.assertIn(needed_preparation_steps, content)
 
 
 class RecipeCategoryViewTest(RecipeFixture):
