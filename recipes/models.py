@@ -22,7 +22,9 @@ class Recipe(models.Model):
     description = models.CharField(
         max_length=168
     )
-    slug = models.SlugField()
+    slug = models.SlugField(
+        unique=True
+    )
     preparation_time = models.IntegerField()
     preparation_time_unit = models.CharField(
         max_length=64,
