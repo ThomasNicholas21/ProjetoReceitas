@@ -19,8 +19,6 @@ class RecipeModelTest(RecipeFixture):
             servings=5,
             servings_unit='Serving unit Html',
             preparation_steps='Preparation steps Html',
-            author=self.make_author(username='Test Auhtor'),
-            category=self.make_category(name='Test'),
         )
         recipe.full_clean()
         recipe.save()
@@ -45,6 +43,9 @@ class RecipeModelTest(RecipeFixture):
                 ('preparation_steps_is_html', False),
                 ('is_published', False),
                 ('cover', 'default/hamburguer.png'),
+                ('preparation_time_unit', 'minutos'),
+                ('author', None),
+                ('category', None),
             ]
     )
     def test_recipe_model_fields_with_default(self, field, default):
