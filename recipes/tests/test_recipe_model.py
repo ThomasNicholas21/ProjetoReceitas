@@ -57,3 +57,14 @@ class RecipeModelTest(RecipeFixture):
             default,
             msg=f'"{field}" default value is not "{current_atribute_value}"'
         )
+
+    def test_recipe_model_str_method(self):
+        """Testing if __str__ method is correct"""
+        self.recipe.title = 'Testing __str__ special method'
+        self.recipe.full_clean()
+        self.recipe.save()
+
+        self.assertEqual(
+            str(self.recipe),
+            f'Receita: {self.recipe.title }'
+        )
