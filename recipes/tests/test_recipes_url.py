@@ -1,5 +1,5 @@
-from django.test import TestCase
-from django.urls import reverse
+from django.test import TestCase, override_settings
+from django.urls import reverse, get_resolver
 
 
 class RecipeURLsTest(TestCase):
@@ -24,3 +24,21 @@ class RecipeURLsTest(TestCase):
                 }
             )
         self.assertEqual(category_url, '/recipes/category/1/')
+
+
+class ProjectURLsTest(TestCase):
+    @override_settings(DEBUG=True)
+    def test_static_and_media_urls(self):
+        resolver = get_resolver()
+
+        static_match = resolver.resolve('/static/test.css')
+        media_match = resolver.resolve('/media/test.jpg')
+
+        self.assertIsNotNone(static_match)
+        self.assertIsNotNone(media_match)
+
+    @override_settings(DEBUG=False)
+    def test_urls_debug_false_import(self):
+        import importlib
+        import project.urls
+        importlib.reload(project.urls)
