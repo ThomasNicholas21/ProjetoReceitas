@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 
 class Category(models.Model):
     name = models.CharField(
-        verbose_name=64
+        max_length=64
     )
 
     class Meta:
