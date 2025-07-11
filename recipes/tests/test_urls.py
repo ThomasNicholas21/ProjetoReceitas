@@ -2,7 +2,7 @@ from django.test import TestCase, override_settings
 from django.urls import reverse
 
 
-class RecipeURLsTest(TestCase):
+class RecipeAppURLsTest(TestCase):
     def test_recipes_home_url_is_correct(self):
         """Test if home url is correct"""
         home_url = reverse('recipes:home')
