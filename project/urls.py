@@ -21,10 +21,10 @@ from django.conf.urls.static import static
 
 
 urlpatterns = [
-    # apps url
-    path('', include('recipes.urls')),
     # configs
     path('admin/', admin.site.urls),
+    # apps url
+    path('', include('recipes.urls')),
 ]
 
 
