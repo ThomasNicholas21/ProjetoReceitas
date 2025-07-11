@@ -4,10 +4,12 @@ from django.urls import reverse, get_resolver
 
 class RecipeURLsTest(TestCase):
     def test_recipes_home_url_is_correct(self):
+        """Test if home url is correct"""
         home_url = reverse('recipes:home')
         self.assertEqual(home_url, '/')
 
     def test_recipes_detail_url_is_correct(self):
+        """Test if detail url is correct"""
         recipe_url = reverse(
             'recipes:recipe',
             kwargs={
@@ -17,6 +19,7 @@ class RecipeURLsTest(TestCase):
         self.assertEqual(recipe_url, '/recipes/1/')
 
     def test_recipes_category_url_is_correct(self):
+        """Test if category url is correct"""
         category_url = reverse(
             'recipes:category',
             kwargs={
@@ -25,10 +28,16 @@ class RecipeURLsTest(TestCase):
             )
         self.assertEqual(category_url, '/recipes/category/1/')
 
+    def test_recipes_search_url_is_correct(self):
+        """Test if search url is correct"""
+        search_url = reverse('recipes:search')
+        self.assertEqual(search_url, '/recipes/search/')
+
 
 class ProjectURLsTest(TestCase):
     @override_settings(DEBUG=True)
     def test_static_and_media_urls(self):
+        """Test static and media url is functioning"""
         resolver = get_resolver()
 
         static_match = resolver.resolve('/static/test.css')
@@ -39,6 +48,7 @@ class ProjectURLsTest(TestCase):
 
     @override_settings(DEBUG=False)
     def test_urls_debug_false_import(self):
+        """Test DEBUG false to static and media url"""
         import importlib
         import project.urls
         importlib.reload(project.urls)
