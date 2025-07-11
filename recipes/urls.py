@@ -13,6 +13,13 @@ urlpatterns = [
         name='home'
     ),
 
+    # search
+    path(
+        'recipes/search/',
+        views.search,
+        name='search'
+    ),
+
     # recipe
     path(
         'recipes/<int:id_recipe>/',
@@ -25,12 +32,5 @@ urlpatterns = [
         'recipes/category/<int:id_category>/',
         views.category,
         name='category'
-    ),
-
-    # search
-    path(
-        'recipes/search/',
-        views.search,
-        name='search'
     ),
 ]

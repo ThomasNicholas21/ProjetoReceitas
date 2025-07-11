@@ -1,9 +1,12 @@
 from django.shortcuts import render
 from django.shortcuts import get_object_or_404, get_list_or_404
+from django.http.request import HttpRequest
+from django.http.response import HttpResponse
+from django.http import Http404
 from recipes.models import Recipe
 
 
-def home(request):
+def home(request: HttpRequest) -> HttpResponse:
     recipes = (
         Recipe
         .objects
@@ -24,7 +27,7 @@ def home(request):
     )
 
 
-def category(request, id_category):
+def category(request: HttpRequest, id_category) -> HttpResponse:
     recipe = (
         Recipe
         .objects
@@ -47,7 +50,7 @@ def category(request, id_category):
     )
 
 
-def recipe(request, id_recipe):
+def recipe(request: HttpRequest, id_recipe) -> HttpResponse:
     recipe = get_object_or_404(
         Recipe,
         id=id_recipe,
@@ -64,5 +67,18 @@ def recipe(request, id_recipe):
     )
 
 
-def search():
-    pass
+def search(request: HttpRequest) -> HttpResponse:
+    search_request: str = request.GET.get('q', '').strip()
+    context: dict = {
+        'page_title': f'Pesquisa: {search_request}',
+        'search_request': search_request
+    }
+
+    if not search_request:
+        raise Http404()
+
+    return render(
+        request=request,
+        template_name='recipes/pages/search.html',
+        context=context
+    )
