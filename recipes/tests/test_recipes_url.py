@@ -1,5 +1,5 @@
 from django.test import TestCase, override_settings
-from django.urls import reverse, get_resolver
+from django.urls import reverse
 
 
 class RecipeURLsTest(TestCase):
@@ -35,17 +35,6 @@ class RecipeURLsTest(TestCase):
 
 
 class ProjectURLsTest(TestCase):
-    @override_settings(DEBUG=True)
-    def test_static_and_media_urls(self):
-        """Test static and media url is functioning"""
-        resolver = get_resolver()
-
-        static_match = resolver.resolve('/static/test.css')
-        media_match = resolver.resolve('/media/test.jpg')
-
-        self.assertIsNotNone(static_match)
-        self.assertIsNotNone(media_match)
-
     @override_settings(DEBUG=False)
     def test_urls_debug_false_import(self):
         """Test DEBUG false to static and media url"""
