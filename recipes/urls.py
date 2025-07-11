@@ -26,4 +26,11 @@ urlpatterns = [
         views.category,
         name='category'
     ),
+
+    # search
+    path(
+        'recipes/search/',
+        views.search,
+        name='search'
+    ),
 ]

@@ -62,3 +62,7 @@ def recipe(request, id_recipe):
         template_name='recipes/pages/recipe.html',
         context=context
     )
+
+
+def search():
+    pass
