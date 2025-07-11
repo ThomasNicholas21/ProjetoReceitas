@@ -1,5 +1,5 @@
 from django.core.exceptions import ValidationError
-from recipes.tests.test_recipes_fixture import RecipeFixture
+from recipes.tests.base_fixture import RecipeFixture
 
 
 class CategoryModelTest(RecipeFixture):
