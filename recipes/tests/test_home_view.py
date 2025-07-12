@@ -1,5 +1,5 @@
 from django.urls import reverse, resolve
-from recipes.tests.base_fixture import RecipeFixture
+from recipes.tests.test_base_fixture import RecipeFixture
 from recipes import views
 
 
