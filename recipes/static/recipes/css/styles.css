@@ -416,3 +416,26 @@ body {
 .main-footer a:hover {
     filter: brightness(.8);
 }
+
+/* pagination style */
+
+.pagination-content {
+    display: flex;
+    flex-flow: row wrap;
+    gap: 1rem 0.5rem;
+}
+
+.pagination .page-item {
+    background: var(--color-primary);
+    padding: 0.5rem 1rem;
+    border-radius: .8rem;
+}
+
+.pagination .page-link {
+    text-decoration: none;
+    color: var(--color-white);
+}
+
+.pagination .current-page {
+    background: var(--color-primary-hover);
+}
