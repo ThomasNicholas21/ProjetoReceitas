@@ -58,6 +58,7 @@ class RecipeHomeViewTest(RecipeFixture):
         )
 
     def test_pagination_returns_status_code_200(self):
+        """Testing status code returned by pagination"""
         for iterator in range(6):
             self.make_recipe(
                 title=f'testing-pagination{iterator}',
@@ -69,7 +70,25 @@ class RecipeHomeViewTest(RecipeFixture):
         response = self.client.get(reverse('recipes:home') + '?page=2')
         self.assertEqual(response.status_code, 200)
 
+    def test_pagination_returns_status_code_404(self):
+        """Test if client trys to access a invalid page"""
+        for iterator in range(6):
+            self.make_recipe(
+                title=f'testing-pagination{iterator}',
+                slug=f'testing-pagination-{iterator}',
+                author_data={
+                    'username': f'testing-pagination-{iterator}'
+                }
+            )
+        response = self.client.get(reverse('recipes:home') + '?page=5')
+        self.assertEqual(response.status_code, 404)
+
     def test_pagination_has_3_objects_per_page(self):
+        """
+        Test if there are 3 objects per page in pagination.
+        This test may break if the number of objects
+        per page is changed by the developer.
+        """
         for iterator in range(6):
             self.make_recipe(
                 title=f'testing-pagination{iterator}',
@@ -83,16 +102,26 @@ class RecipeHomeViewTest(RecipeFixture):
 
         self.assertEqual(len(response_context_recipes), 3)
 
-    # def test_pagination_value_error(self):
-    #     for iterator in range(6):
-    #         self.make_recipe(
-    #             title=f'testing-pagination{iterator}',
-    #             slug=f'testing-pagination-{iterator}',
-    #             author_data={
-    #                 'username': f'testing-pagination-{iterator}'
-    #             }
-    #         )
-    #     response = self.client.get(reverse('recipes:home') + '?page=a')
-    #     response_context_recipes = response.context['recipes']
+    def test_pagination_value_error(self):
+        """
+        Testing if Value Error is been trated appropriately
+        by the make_pagination() function
+        """
+        for iterator in range(6):
+            self.make_recipe(
+                title=f'testing-pagination{iterator}',
+                slug=f'testing-pagination-{iterator}',
+                author_data={
+                    'username': f'testing-pagination-{iterator}'
+                }
+            )
+        response = self.client.get(
+            reverse('recipes:home') + '?page=1'
+        )
+        response_except_value_error = self.client.get(
+            reverse('recipes:home') + '?page=a'
+        )
 
-    #     self.assertEqual(len(response_context_recipes), 3)
+        self.assertEqual(
+            response.content, response_except_value_error.content
+        )
