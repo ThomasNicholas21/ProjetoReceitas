@@ -56,3 +56,43 @@ class RecipeHomeViewTest(RecipeFixture):
             'Nenhuma receita entrada no momento 😔',
             content,
         )
+
+    def test_pagination_returns_status_code_200(self):
+        for iterator in range(6):
+            self.make_recipe(
+                title=f'testing-pagination{iterator}',
+                slug=f'testing-pagination-{iterator}',
+                author_data={
+                    'username': f'testing-pagination-{iterator}'
+                }
+            )
+        response = self.client.get(reverse('recipes:home') + '?page=2')
+        self.assertEqual(response.status_code, 200)
+
+    def test_pagination_has_3_objects_per_page(self):
+        for iterator in range(6):
+            self.make_recipe(
+                title=f'testing-pagination{iterator}',
+                slug=f'testing-pagination-{iterator}',
+                author_data={
+                    'username': f'testing-pagination-{iterator}'
+                }
+            )
+        response = self.client.get(reverse('recipes:home') + '?page=2')
+        response_context_recipes = response.context['recipes']
+
+        self.assertEqual(len(response_context_recipes), 3)
+
+    # def test_pagination_value_error(self):
+    #     for iterator in range(6):
+    #         self.make_recipe(
+    #             title=f'testing-pagination{iterator}',
+    #             slug=f'testing-pagination-{iterator}',
+    #             author_data={
+    #                 'username': f'testing-pagination-{iterator}'
+    #             }
+    #         )
+    #     response = self.client.get(reverse('recipes:home') + '?page=a')
+    #     response_context_recipes = response.context['recipes']
+
+    #     self.assertEqual(len(response_context_recipes), 3)
