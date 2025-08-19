@@ -6,6 +6,10 @@ from django.http import Http404
 from django.db.models import Q
 from recipes.models import Recipe
 from utils.recipes.pagination import make_pagination
+import os
+
+
+PER_PAGE = os.environ.get('PER_PAGE', 3)
 
 
 def home(request: HttpRequest) -> HttpResponse:
@@ -22,7 +26,7 @@ def home(request: HttpRequest) -> HttpResponse:
     page_obj, pagination_range, current_page = make_pagination(
         request=request,
         queryset=recipes,
-        per_page=3,
+        per_page=PER_PAGE,
         pages=4
     )
 
@@ -61,9 +65,12 @@ def category(request: HttpRequest, id_category) -> HttpResponse:
     page_obj, pagination_range, current_page = make_pagination(
         request=request,
         queryset=recipes,
-        per_page=3,
+        per_page=PER_PAGE,
         pages=4
     )
+
+    if current_page > len(pagination_range.get('page_range')):
+        raise Http404()
 
     category_title = f'Categoria: {recipe.first().category.name}'
     current_page_title = f'Página atual: {current_page}'
@@ -117,9 +124,12 @@ def search(request: HttpRequest) -> HttpResponse:
     page_obj, pagination_range, current_page = make_pagination(
         request=request,
         queryset=recipes,
-        per_page=3,
+        per_page=PER_PAGE,
         pages=4
     )
+
+    if current_page > len(pagination_range.get('page_range')):
+        raise Http404()
 
     search_title = f'Pesquisa: {search_request}'
     current_page_title = f'Página atual: {current_page}'
