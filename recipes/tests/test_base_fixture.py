@@ -9,6 +9,9 @@ class RecipeFixture(TestCase):
 
     def make_category(self, name='Category Test'):
         """Create category to test"""
+        if models.Category.objects.filter(name=name).exists():
+            return models.Category.objects.get(name=name)
+
         return models.Category.objects.create(name=name)
 
     def make_author(
