@@ -1,4 +1,5 @@
 from django.urls import reverse, resolve
+from unittest.mock import patch
 from recipes.tests.test_base_fixture import RecipeFixture
 from recipes import views
 
@@ -57,7 +58,7 @@ class RecipeHomeViewTest(RecipeFixture):
             content,
         )
 
-    def test_pagination_returns_status_code_200(self):
+    def test_home_pagination_returns_status_code_200(self):
         """Testing status code returned by pagination"""
         for iterator in range(6):
             self.make_recipe(
@@ -70,7 +71,7 @@ class RecipeHomeViewTest(RecipeFixture):
         response = self.client.get(reverse('recipes:home') + '?page=2')
         self.assertEqual(response.status_code, 200)
 
-    def test_pagination_returns_status_code_404(self):
+    def test_home_pagination_returns_status_code_404(self):
         """Test if client trys to access a invalid page"""
         for iterator in range(6):
             self.make_recipe(
@@ -83,11 +84,10 @@ class RecipeHomeViewTest(RecipeFixture):
         response = self.client.get(reverse('recipes:home') + '?page=5')
         self.assertEqual(response.status_code, 404)
 
-    def test_pagination_has_3_objects_per_page(self):
+    def test_home_pagination_and_objects_per_page(self):
         """
         Test if there are 3 objects per page in pagination.
-        This test may break if the number of objects
-        per page is changed by the developer.
+        This test may be useless if PER_PAGE != 3
         """
         for iterator in range(6):
             self.make_recipe(
@@ -97,24 +97,21 @@ class RecipeHomeViewTest(RecipeFixture):
                     'username': f'testing-pagination-{iterator}'
                 }
             )
-        response = self.client.get(reverse('recipes:home') + '?page=2')
-        response_context_recipes = response.context['recipes']
 
-        self.assertEqual(len(response_context_recipes), 3)
+        with patch('recipes.views.PER_PAGE', new=3):
+            response = self.client.get(reverse('recipes:home'))
+            recipes = response.context['recipes']
+            paginator = recipes.paginator
 
-    def test_pagination_value_error(self):
+            self.assertEqual(paginator.num_pages, 2)
+            self.assertEqual(len(paginator.get_page(1)), 3)
+            self.assertEqual(len(paginator.get_page(2)), 3)
+
+    def test_home_pagination_value_error(self):
         """
         Testing if Value Error is been trated appropriately
         by the make_pagination() function
         """
-        for iterator in range(6):
-            self.make_recipe(
-                title=f'testing-pagination{iterator}',
-                slug=f'testing-pagination-{iterator}',
-                author_data={
-                    'username': f'testing-pagination-{iterator}'
-                }
-            )
         response = self.client.get(
             reverse('recipes:home') + '?page=1'
         )
