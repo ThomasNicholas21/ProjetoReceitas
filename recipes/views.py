@@ -4,6 +4,7 @@ from django.http.request import HttpRequest
 from django.http.response import HttpResponse
 from django.http import Http404
 from django.db.models import Q
+from django.contrib import messages
 from recipes.models import Recipe
 from utils.recipes.pagination import make_pagination
 import os
@@ -32,6 +33,12 @@ def home(request: HttpRequest) -> HttpResponse:
 
     if current_page > len(pagination_range.get('page_range')):
         raise Http404()
+
+    messages.success(request, 'Test')
+    messages.error(request, 'Test')
+    messages.info(request, 'Test')
+    messages.warning(request, 'Test')
+    messages.debug(request, 'Test')
 
     current_page_title = f'Página atual: {current_page}'
     context = {

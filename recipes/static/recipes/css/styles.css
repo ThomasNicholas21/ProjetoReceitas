@@ -449,6 +449,12 @@ body {
   color: var(--color-dark-text);
 }
 
+.messages-container {
+  display: flex;
+  flex-flow: column nowrap;
+  gap: calc(var(--spacing-gutter-medium) / 2);
+}
+
 .message-error {
   border: 1px solid var(--color-error-dark);
   background: var(--color-error-light);
@@ -489,4 +495,10 @@ body {
 
 .center {
   text-align: center;
+}
+
+@media (max-width: 600px) {
+  .main-content-list {
+    grid-template-columns: repeat(auto-fit, minmax(100%, 1fr));
+  }
 }
