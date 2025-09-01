@@ -34,12 +34,6 @@ def home(request: HttpRequest) -> HttpResponse:
     if current_page > len(pagination_range.get('page_range')):
         raise Http404()
 
-    messages.success(request, 'Test')
-    messages.error(request, 'Test')
-    messages.info(request, 'Test')
-    messages.warning(request, 'Test')
-    messages.debug(request, 'Test')
-
     current_page_title = f'Página atual: {current_page}'
     context = {
         'recipes': page_obj,
