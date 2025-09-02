@@ -1,4 +1,4 @@
-from django.urls import path
+from django.urls import path, include
 from recipes import views
 
 
@@ -33,4 +33,7 @@ urlpatterns = [
         views.category,
         name='category'
     ),
+    # apis
+    path('api/v2/', include('recipes.api.urls_v2')),
+    path('api/v3/', include('recipes.api.urls_v3'))
 ]
