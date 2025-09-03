@@ -35,5 +35,6 @@ urlpatterns = [
     ),
     # apis
     path('api/v2/', include('recipes.api.urls_v2')),
-    path('api/v3/', include('recipes.api.urls_v3'))
+    path('api/v3/', include('recipes.api.urls_v3')),
+    path('api/v4/', include('recipes.api.urls_v4'))
 ]
