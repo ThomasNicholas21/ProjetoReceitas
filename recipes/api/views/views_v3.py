@@ -1,10 +1,8 @@
-# from rest_framework.views import APIView
 from rest_framework.generics import (
     ListCreateAPIView,
     RetrieveUpdateDestroyAPIView
 )
-# from rest_framework.response import Response
-# from rest_framework import status
+from rest_framework.response import Response
 
 from recipes.models import Recipe
 from recipes.api.serializer import RecipeSerializer
@@ -14,41 +12,19 @@ class GenericRecipesApiView(ListCreateAPIView):
     queryset = Recipe.objects.all().order_by("id")
     serializer_class = RecipeSerializer
 
-    # def get(self, request):
-    #     recipes = Recipe.objects.all().order_by("id")
-    #     serializer = RecipeSerializer(recipes, many=True)
-    #     return Response(serializer.data)
-
-    # def post(self, request):
-    #     serializer = RecipeSerializer(data=request.data)
-    #     serializer.is_valid(raise_exception=True)
-    #     serializer.save()
-    #     return Response(serializer.data)
-
 
 class GenericDetailRecipesApiView(RetrieveUpdateDestroyAPIView):
     queryset = Recipe.objects.all()
     serializer_class = RecipeSerializer
-#     def get(self, request, pk):
-#         recipe = Recipe.objects.get(pk=pk)
-#         serializer = RecipeSerializer(recipe)
-#         return Response(serializer.data)
 
-#     def patch(self, request, pk):
-#         serializer = RecipeSerializer(
-#             data=request.data, partial=True
-#         )
-#         serializer.is_valid(raise_exception=True)
-#         serializer.save()
-#         return Response(serializer.data)
-
-#     def put(self, request, pk):
-#         serializer = RecipeSerializer(data=request.data)
-#         serializer.is_valid(raise_exception=True)
-#         serializer.save()
-#         return Response(serializer.data)
-
-#     def delete(self, request, pk):
-#         recipe = Recipe.objects.get(pk=pk)
-#         recipe.delete()
-#         return Response(status=status.HTTP_204_NO_CONTENT)
+    def patch(self, request, *args, **kwargs):
+        pk = kwargs.get('pk')
+        recipe = Recipe.objects.get(pk=pk)
+        serializar = RecipeSerializer(
+            instance=recipe,
+            data=request.data,
+            partial=True
+        )
+        serializar.is_valid(raise_exception=True)
+        serializar.save()
+        return Response(serializar.data)

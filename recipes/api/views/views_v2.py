@@ -27,7 +27,9 @@ class DetailRecipesApiView(APIView):
 
     def patch(self, request, pk):
         serializer = RecipeSerializer(
-            data=request.data, partial=True
+            instance=Recipe.objects.get(pk=pk),
+            data=request.data,
+            partial=True
         )
         serializer.is_valid(raise_exception=True)
         serializer.save()
