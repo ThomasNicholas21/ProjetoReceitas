@@ -78,7 +78,7 @@ class Recipe(models.Model):
     def save(self, *args, **kwargs):
         if not self.slug:
             self.slug = slugify(
-                self.title + str(self.id) + random.randint(1, 999)
+                self.title + str(self.id) + str(random.randint(1, 999))
             )
         super().save(*args, **kwargs)
 
