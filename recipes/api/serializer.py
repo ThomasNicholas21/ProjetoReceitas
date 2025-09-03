@@ -32,8 +32,12 @@ class RecipeSerializer(serializers.ModelSerializer):
         if self.instance is not None and attrs.get('preparation_time') is None:
             attrs['preparation_time'] = self.instance.preparation_time
 
-        title = attrs.get('title')
-        description = attrs.get('description')
+        title = attrs.get(
+            'title', getattr(self.instance, 'title', None)
+        )
+        description = attrs.get(
+            'description', getattr(self.instance, 'description', None)
+        )
         if title == description:
             raise serializers.ValidationError(
                 {
@@ -52,3 +56,12 @@ class RecipeSerializer(serializers.ModelSerializer):
             )
 
         return value
+
+    def save(self, **kwargs):
+        return super().save(**kwargs)
+
+    def create(self, validated_data):
+        return super().create(validated_data)
+
+    def update(self, instance, validated_data):
+        return super().update(instance, validated_data)
