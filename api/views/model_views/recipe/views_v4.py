@@ -3,7 +3,7 @@ from rest_framework.request import Request
 from rest_framework.viewsets import ModelViewSet
 
 from recipes.models import Recipe
-from api.serializer import RecipeSerializer
+from api.views.model_views.serializer import RecipeSerializer
 from api.paginator import DefaultPaginationOffset
 
 

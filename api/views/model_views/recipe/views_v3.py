@@ -5,7 +5,7 @@ from rest_framework.generics import (
 from rest_framework.response import Response
 
 from recipes.models import Recipe
-from api.serializer import RecipeSerializer
+from api.views.model_views.serializer import RecipeSerializer
 
 
 class GenericRecipesApiView(ListCreateAPIView):
