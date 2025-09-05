@@ -3,7 +3,7 @@ from rest_framework.response import Response
 from rest_framework import status
 
 from recipes.models import Recipe
-from recipes.api.serializer import RecipeSerializer
+from api.serializer import RecipeSerializer
 
 
 class RecipesApiView(APIView):
