@@ -1,6 +1,7 @@
 from rest_framework.response import Response
 from rest_framework.request import Request
 from rest_framework.viewsets import ModelViewSet
+from rest_framework.permissions import DjangoModelPermissions
 
 from recipes.models import Recipe
 from api.views.model_views.serializer import RecipeSerializer
@@ -11,6 +12,7 @@ class ViewSetRecipes(ModelViewSet):
     queryset = Recipe.objects.all()
     serializer_class = RecipeSerializer
     pagination_class = DefaultPaginationOffset
+    permission_classes = [DjangoModelPermissions]
 
     def partial_update(self, request: Request, *args, **kwargs):
         pk = kwargs.get('pk')
