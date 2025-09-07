@@ -33,7 +33,5 @@ jobs:
 
     - name: Run Tests
       run: |
-        # O comando 'migrate' é útil para garantir que o banco de testes está com o schema correto.
-        # O comando 'makemigrations' foi REMOVIDO.
         python manage.py migrate
         python manage.py test
