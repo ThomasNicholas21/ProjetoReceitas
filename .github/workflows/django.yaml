@@ -28,8 +28,8 @@ jobs:
       run: |
         echo "SECRET_KEY=${{ secrets.SECRET_KEY }}" >> .env
         echo "SECRET_KEY_JWT=${{ secrets.SECRET_KEY_JWT }}" >> .env
-        echo "DEBUG=${{ vars.DEBUG }}" >> .env
-        echo "PER_PAGE=${{ vars.PER_PAGE }}" >> .env
+        echo "DEBUG=${{ vars.DEBUG || 0 }}" >> .env
+        echo "PER_PAGE=${{ vars.PER_PAGE || 3}}" >> .env
 
     - name: Run Tests
       run: |
