@@ -1,5 +1,7 @@
 from django.urls import path
 from .recipe import (
+    recipe_api_view,
+    detail_recipes_api_view,
     RecipesApiView,
     DetailRecipesApiView,
     GenericRecipesApiView,
@@ -9,6 +11,17 @@ from .recipe import (
 
 
 urlpatterns = [
+    # views V1
+    path(
+        'v1/recipes/',
+        recipe_api_view,
+        name="recipe-api-v1-list"
+    ),
+    path(
+        'v1/recipes/<int:pk>/',
+        detail_recipes_api_view,
+        name="recipe-api-v1-detail"
+    ),
     # APIView V2
     path(
         'v2/recipes/',
