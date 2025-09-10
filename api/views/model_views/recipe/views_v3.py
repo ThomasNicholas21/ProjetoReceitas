@@ -3,19 +3,30 @@ from rest_framework.generics import (
     RetrieveUpdateDestroyAPIView
 )
 from rest_framework.response import Response
+from rest_framework.permissions import IsAuthenticatedOrReadOnly
 
 from recipes.models import Recipe
 from api.views.model_views.serializer import RecipeSerializer
+from api.paginator import DefaultPaginationOffset
+from api.permissions import IsOwner
 
 
 class GenericRecipesApiView(ListCreateAPIView):
     queryset = Recipe.objects.all().order_by("id")
     serializer_class = RecipeSerializer
+    permission_classes = [IsAuthenticatedOrReadOnly]
+    pagination_class = DefaultPaginationOffset
 
 
 class GenericDetailRecipesApiView(RetrieveUpdateDestroyAPIView):
     queryset = Recipe.objects.all()
     serializer_class = RecipeSerializer
+
+    def get_permissions(self):
+        if self.request.method in ["PATCH", "PUT", "DELETE"]:
+            return [IsOwner(),]
+
+        return super().get_permissions()
 
     def patch(self, request, *args, **kwargs):
         pk = kwargs.get('pk')

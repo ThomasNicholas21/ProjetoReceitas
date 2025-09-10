@@ -1,15 +1,22 @@
 from rest_framework.views import APIView
 from rest_framework.response import Response
+from rest_framework.permissions import IsAuthenticatedOrReadOnly
 from rest_framework import status
 
 from recipes.models import Recipe
 from api.views.model_views.serializer import RecipeSerializer
+from api.paginator import DefaultPaginationOffset
+from api.permissions import IsOwner
 
 
 class RecipesApiView(APIView):
+    permission_classes = [IsAuthenticatedOrReadOnly]
+
     def get(self, request):
+        paginator = DefaultPaginationOffset()
         recipes = Recipe.objects.all().order_by("id")
-        serializer = RecipeSerializer(recipes, many=True)
+        result = paginator.paginate_queryset(recipes, request)
+        serializer = RecipeSerializer(result, many=True)
         return Response(serializer.data)
 
     def post(self, request):
@@ -20,6 +27,12 @@ class RecipesApiView(APIView):
 
 
 class DetailRecipesApiView(APIView):
+    def get_permissions(self):
+        if self.request.method in ["PATCH", "PUT", "DELETE"]:
+            return [IsOwner(),]
+
+        return super().get_permissions()
+
     def get(self, request, pk):
         recipe = Recipe.objects.get(pk=pk)
         serializer = RecipeSerializer(recipe)

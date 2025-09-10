@@ -27,7 +27,10 @@ class ViewSetRecipes(ModelViewSet):
         serializar = RecipeSerializer(
             instance=recipe,
             data=request.data,
-            partial=True
+            partial=True,
+            context={
+                'request': request
+            }
         )
         serializar.is_valid(raise_exception=True)
         serializar.save()
