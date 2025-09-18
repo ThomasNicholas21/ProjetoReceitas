@@ -61,6 +61,8 @@ class RecipeSerializer(serializers.ModelSerializer):
         return super().save(**kwargs)
 
     def create(self, validated_data):
+        request = self.context.get('request')
+        validated_data['author'] = request.user
         return super().create(validated_data)
 
     def update(self, instance, validated_data):
