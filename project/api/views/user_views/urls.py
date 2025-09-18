@@ -1,5 +1,5 @@
 from django.urls import path
-from api.views.user_views.user.authentication import (
+from project.api.views.user_views.user.authentication import (
     TokenObtainPairView,
     TokenRefreshView,
     TokenVerifyView

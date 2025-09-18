@@ -4,9 +4,9 @@ from rest_framework.viewsets import ModelViewSet
 from rest_framework.permissions import IsAuthenticatedOrReadOnly
 
 from recipes.models import Recipe
-from api.views.model_views.serializer import RecipeSerializer
-from api.paginator import DefaultPaginationOffset
-from api.permissions import IsOwner
+from project.api.views.model_views.serializer import RecipeSerializer
+from project.api.paginator import DefaultPaginationOffset
+from project.api.permissions import IsOwner
 
 
 class ViewSetRecipes(ModelViewSet):

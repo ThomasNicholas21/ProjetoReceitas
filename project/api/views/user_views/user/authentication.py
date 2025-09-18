@@ -1,6 +1,6 @@
 from rest_framework_simplejwt import views
 
-from api.views.user_views.serializer import (
+from project.api.views.user_views.serializer import (
     CustomTokenObtainPairSerializer,
     CustomVerifySerializer
 )
