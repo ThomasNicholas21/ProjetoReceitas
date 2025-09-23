@@ -98,7 +98,7 @@ class RecipeHomeViewTest(RecipeFixture):
                 }
             )
 
-        with patch('recipes.views.PER_PAGE', new=3):
+        with patch('apps.recipes.views.PER_PAGE', new=3):
             response = self.client.get(reverse('recipes:home'))
             recipes = response.context['recipes']
             paginator = recipes.paginator
