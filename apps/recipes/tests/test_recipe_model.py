@@ -1,7 +1,7 @@
 from django.core.exceptions import ValidationError
 from parameterized import parameterized
-from recipes.tests.test_base_fixture import RecipeFixture
-from recipes.models import Recipe
+from apps.recipes.tests.test_base_fixture import RecipeFixture
+from apps.recipes.models import Recipe
 
 
 class RecipeModelTest(RecipeFixture):

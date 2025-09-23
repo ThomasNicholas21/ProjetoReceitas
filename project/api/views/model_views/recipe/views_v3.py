@@ -5,7 +5,7 @@ from rest_framework.generics import (
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticatedOrReadOnly
 
-from recipes.models import Recipe
+from apps.recipes.models import Recipe
 from project.api.views.model_views.serializer import RecipeSerializer
 from project.api.paginator import DefaultPaginationOffset
 from project.api.permissions import IsOwner

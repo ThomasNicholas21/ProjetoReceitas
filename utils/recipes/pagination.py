@@ -2,7 +2,7 @@ from django.core.paginator import Paginator, Page
 from django.http.request import HttpRequest
 from typing import Any
 from math import ceil
-from recipes.models import Recipe
+from apps.recipes.models import Recipe
 
 
 def make_pagination_range(

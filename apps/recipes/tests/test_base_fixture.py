@@ -1,5 +1,5 @@
 from django.test import TestCase
-from recipes import models
+from apps.recipes import models
 
 
 class RecipeFixture(TestCase):

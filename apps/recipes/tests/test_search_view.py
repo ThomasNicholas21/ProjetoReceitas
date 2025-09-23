@@ -1,6 +1,6 @@
 from django.urls import reverse, resolve
-from recipes.tests.test_base_fixture import RecipeFixture
-from recipes import views
+from apps.recipes.tests.test_base_fixture import RecipeFixture
+from apps.recipes import views
 
 
 class RecipeSearchViewTest(RecipeFixture):

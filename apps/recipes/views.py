@@ -4,7 +4,7 @@ from django.http.request import HttpRequest
 from django.http.response import HttpResponse
 from django.http import Http404
 from django.db.models import Q
-from recipes.models import Recipe
+from apps.recipes.models import Recipe
 from utils.recipes.pagination import make_pagination
 import os
 

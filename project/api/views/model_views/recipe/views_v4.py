@@ -3,7 +3,7 @@ from rest_framework.request import Request
 from rest_framework.viewsets import ModelViewSet
 from rest_framework.permissions import IsAuthenticatedOrReadOnly
 
-from recipes.models import Recipe
+from apps.recipes.models import Recipe
 from project.api.views.model_views.serializer import RecipeSerializer
 from project.api.paginator import DefaultPaginationOffset
 from project.api.permissions import IsOwner
