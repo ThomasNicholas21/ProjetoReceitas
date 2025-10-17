@@ -6,7 +6,7 @@ class RecipeAppURLsTest(TestCase):
     def test_recipes_home_url_is_correct(self):
         """Test if home url is correct"""
         home_url = reverse('recipes:home')
-        self.assertEqual(home_url, '/')
+        self.assertEqual(home_url, '/recipes/')
 
     def test_recipes_detail_url_is_correct(self):
         """Test if detail url is correct"""
