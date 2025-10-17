@@ -5,7 +5,7 @@ from .forms import RegisterForm
 
 
 def register_view(request):
-    post_data = request.session.get("post_data")
+    post_data = request.session.get("post_data", None)
     form = RegisterForm(post_data)
     context = {"form": form,}
     return render(request, "authors/pages/register.html", context)
