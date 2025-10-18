@@ -500,7 +500,7 @@ body {
 
 .form-content label,
 .form-content .help-text,
-.errorlist {
+.errorlist li {
   display: block;
   margin: 0.5rem 0;
   font-size: 1.4rem;
