@@ -19,5 +19,7 @@ def register_create(request):
     request.session["post_data"] = post_data
 
     form = RegisterForm(post_data)
+    if form.is_valid():
+        return redirect("authors:register")
 
-    return redirect("authors:register")
+    raise Http404()
