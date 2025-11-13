@@ -1,60 +1,39 @@
 from django import forms
-from django.core.exceptions import ValidationError
 from django.contrib.auth.models import User
+from django.core.exceptions import ValidationError
+
+
+def add_placeholder(field, placeholder_val):
+    field.widget.attrs["placeholder"] = placeholder_val
 
 
 class RegisterForm(forms.ModelForm):
-    first_name = forms.CharField(
-        label="Name",
-        max_length=128,
-        widget=forms.TextInput(
-            attrs={
-                "placeholder": "Name",
-            }
-        )
-    )
-    last_name = forms.CharField(
-        label="Last name",
-        max_length=128,
-        widget=forms.TextInput(
-            attrs={
-                "placeholder": "Last name",
-            }
-        )
-    )
-    username = forms.CharField(
-        label="Username",
-        max_length=128,
-        widget=forms.TextInput(
-            attrs={
-                "placeholder": "Username",
-            }
-        )
-    )
-    email = forms.EmailField(
-        label="Email",
-        max_length=128,
-        widget=forms.EmailInput(
-            attrs={
-                "placeholder": "Email",
-            }
-        )
-    )
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        add_placeholder(self.fields["username"], "Your username")
+        add_placeholder(self.fields["email"], "Your e-mail")
+        add_placeholder(self.fields["first_name"], "Ex.: John")
+        add_placeholder(self.fields["last_name"], "Ex.: Doe")
+
     password = forms.CharField(
-        label="Password",
-        widget=forms.PasswordInput(
-            attrs={
-                "placeholder": "Password",
-            }
+        required=True,
+        widget=forms.PasswordInput(attrs={
+            "placeholder": "Your password"
+        }),
+        error_messages={
+            "required": "Password must not be empty"
+        },
+        help_text=(
+            "Password must have at least one uppercase letter, "
+            "one lowercase letter and one number. The length should be "
+            "at least 8 characters."
         )
     )
     confirm_password = forms.CharField(
-        label="Confirm password",
-        widget=forms.PasswordInput(
-            attrs={
-                "placeholder": "Confirm password",
-            }
-        )
+        required=True,
+        widget=forms.PasswordInput(attrs={
+            "placeholder": "Repeat your password"
+        })
     )
 
     class Meta:
@@ -66,6 +45,30 @@ class RegisterForm(forms.ModelForm):
             "email",
             "password",
         ]
+        labels = {
+            "username": "Username",
+            "first_name": "First name",
+            "last_name": "Last name",
+            "email": "E-mail",
+            "password": "Password",
+        }
+        help_texts = {
+            "email": "The e-mail must be valid.",
+        }
+        error_messages = {
+            "username": {
+                "required": "This field must not be empty",
+            }
+        }
+        widgets = {
+            "first_name": forms.TextInput(attrs={
+                "placeholder": "Type your username here",
+                "class": "input text-input"
+            }),
+            "password": forms.PasswordInput(attrs={
+                "placeholder": "Type your password here"
+            })
+        }
 
     def clean(self):
         cleaned_data = super().clean()
@@ -74,3 +77,5 @@ class RegisterForm(forms.ModelForm):
 
         if password != confirm_password:
             raise ValidationError("Password must be equal!")
+
+        return cleaned_data
