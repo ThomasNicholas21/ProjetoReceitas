@@ -5,21 +5,19 @@ from .forms import RegisterForm
 
 
 def register_view(request):
-    post_data = request.session.get("post_data", None)
-    form = RegisterForm(post_data)
-    context = {"form": form,}
-    return render(request, "authors/pages/register.html", context)
+    register_form_data = request.session.get('register_form_data', None)
+    form = RegisterForm(register_form_data)
+    return render(request, 'authors/pages/register.html', {
+        'form': form,
+    })
 
 
 def register_create(request):
     if not request.POST:
         raise Http404()
 
-    post_data = request.POST
-    request.session["post_data"] = post_data
+    POST = request.POST
+    request.session['register_form_data'] = POST
+    form = RegisterForm(POST)
 
-    form = RegisterForm(post_data)
-    if form.is_valid():
-        return redirect("authors:register")
-
-    raise Http404()
+    return redirect('authors:register')
