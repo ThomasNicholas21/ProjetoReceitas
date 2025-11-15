@@ -72,6 +72,12 @@ class RegisterForm(forms.ModelForm):
         confirm_password = cleaned_data.get("confirm_password")
 
         if password != confirm_password:
-            raise ValidationError("Password must be equal!")
+            password_must_be_equal = ValidationError("Both password must be equal!")
+            raise ValidationError(
+                {
+                    "password": password_must_be_equal,
+                    "confirm_password": password_must_be_equal,
+                }
+            )
 
         return cleaned_data
