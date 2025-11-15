@@ -6,7 +6,15 @@
   <div class="main-content center container">
     <h2>Register </h2>
   </div>
-
+  {% if form.errors %}
+    <div class="form-content form-content-grid">
+      <div class="form-group">
+        <div class="message message-error">
+          Errors in the form, please fix them.
+        </div>
+      </div>
+    </div>
+  {% endif %}
   <div class="main-content container">
     <form action="{% url 'authors:create' %}" method="POST">
       {% csrf_token %}
@@ -25,7 +33,6 @@
           </div>
         {% endfor %}
       </div>
-
       <div class="form-content form-content-grid">
         <div class="form-group">
           <button type="submit">Send</button>
