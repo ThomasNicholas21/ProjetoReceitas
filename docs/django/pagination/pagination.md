@@ -12,3 +12,5 @@
 ## Obs
 Esse projeto está sendo feito para praticar habilidades técnicas e para aprimorar a resolução de problemas. A documentação utilizada para esse estudo foi:
 - [Django Documentation Paginator 📚](https://docs.djangoproject.com/en/5.2/intro/tutorial02/)
+
+TESTE
