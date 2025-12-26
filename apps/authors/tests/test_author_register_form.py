@@ -10,10 +10,28 @@ class AuthorRegisterFormUnitTest(TestCase):
                 ("username", "Your username"),
                 ("email", "Your e-mail"),
                 ("first_name", "Ex.: John"),
-                ("last_name", "Ex.: Doe")
+                ("last_name", "Ex.: Doe"),
+                ("password", "Your password"),
+                ("confirm_password", "Repeat your password"),
             ]
     )
     def test_field_placeholder(self, field, placeholder):
         form = RegisterForm()
         field_placeholder = form[field].field.widget.attrs.get("placeholder")
         self.assertEqual(field_placeholder, placeholder)
+
+    @parameterized.expand(
+            [
+                ("password", (
+                        "Password must have at least one uppercase letter, "
+                        "one lowercase letter and one number. The length should be "
+                        "at least 8 characters."
+                    )
+                ),
+                ("email", "The e-mail must be valid.")
+            ]
+    )
+    def test_field_help_text(self, field, help_text):
+        form = RegisterForm()
+        field_help_text = form[field].field.widget.attrs.get("help_text")
+        self.assertEqual(field_help_text, help_text)
