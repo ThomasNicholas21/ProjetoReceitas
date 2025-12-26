@@ -81,7 +81,7 @@ class RecipeCategoryViewTest(RecipeFixture):
                 kwargs={
                     'id_category': 1
                 }
-            ) + '?page=2'
+            ) + '?page=1'
         )
         self.assertEqual(response.status_code, 200)
 

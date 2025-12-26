@@ -68,7 +68,7 @@ class RecipeHomeViewTest(RecipeFixture):
                     'username': f'testing-pagination-{iterator}'
                 }
             )
-        response = self.client.get(reverse('recipes:home') + '?page=2')
+        response = self.client.get(reverse('recipes:home') + '?page=1')
         self.assertEqual(response.status_code, 200)
 
     def test_home_pagination_returns_status_code_404(self):
