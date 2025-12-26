@@ -46,3 +46,19 @@ class AuthorRegisterFormUnitTest(TestCase):
         form = RegisterForm()
         field_error_messages = form[field].field.error_messages.get("required")
         self.assertEqual(field_error_messages, error_messages)
+
+    @parameterized.expand(
+            [
+                ("username", "Username",),
+                ("first_name", "First name"),
+                ("last_name", "Last name"),
+                ("email", "E-mail"),
+                ("password", "Password"),
+                ("confirm_password", "Confirm Password"),
+            ]
+    )
+    def test_field_label(self, field, error_messages):
+        form = RegisterForm()
+        field_label = form[field].field.label
+        self.assertEqual(field_label, error_messages)
+
