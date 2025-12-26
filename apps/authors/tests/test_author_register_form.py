@@ -35,3 +35,14 @@ class AuthorRegisterFormUnitTest(TestCase):
         form = RegisterForm()
         field_help_text = form[field].field.widget.attrs.get("help_text")
         self.assertEqual(field_help_text, help_text)
+
+    @parameterized.expand(
+            [
+                ("username", "This field must not be empty",),
+                ("password", "Password must not be empty")
+            ]
+    )
+    def test_field_error_messages_required(self, field, error_messages):
+        form = RegisterForm()
+        field_error_messages = form[field].field.error_messages.get("required")
+        self.assertEqual(field_error_messages, error_messages)
