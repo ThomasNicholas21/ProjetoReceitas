@@ -49,6 +49,7 @@ class RegisterForm(forms.ModelForm):
     )
     confirm_password = forms.CharField(
         required=True,
+        label="Confirm Password",
         widget=forms.PasswordInput(attrs={
             "placeholder": "Repeat your password"
         })
