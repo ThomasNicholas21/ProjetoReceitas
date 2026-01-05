@@ -33,7 +33,7 @@ class AuthorRegisterFormUnitTest(TestCase):
     )
     def test_field_help_text(self, field, help_text):
         form = RegisterForm()
-        field_help_text = form[field].field.widget.attrs.get("help_text")
+        field_help_text = form[field].field.help_text
         self.assertEqual(field_help_text, help_text)
 
     @parameterized.expand(
