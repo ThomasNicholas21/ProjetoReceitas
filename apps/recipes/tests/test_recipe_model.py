@@ -68,3 +68,18 @@ class RecipeModelTest(RecipeFixture):
             str(self.recipe),
             f'Receita: {self.recipe.title }'
         )
+
+    def test_recipe_model_with_no_slug(self):
+        """Testing if model will generate slug if is not passed"""
+        recipe_no_slug = Recipe.objects.create(
+            title='Title Test Html',
+            description='Description Test Html',
+            preparation_time=10,
+            preparation_time_unit='minutos',
+            servings=5,
+            servings_unit='Serving unit Html',
+            preparation_steps='Preparation steps Html',
+        )
+        recipe_no_slug.full_clean()
+        recipe_no_slug.save()
+        self.assertNotEqual(recipe_no_slug.slug, None)
